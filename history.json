@@ -1,0 +1,146 @@
+[
+  {
+    "timestampIso": "2025-12-28T20:46:05.5152415-03:00[America/Sao_Paulo]",
+    "from": "BRL",
+    "to": "CNY",
+    "amount": 3000,
+    "rate": 1.2695,
+    "result": 3808.50
+  },
+  {
+    "timestampIso": "2025-12-28T20:43:24.4071995-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 0,
+    "rate": 5.5213,
+    "result": 0.00
+  },
+  {
+    "timestampIso": "2025-12-28T20:43:11.1228925-03:00[America/Sao_Paulo]",
+    "from": "CNY",
+    "to": "EUR",
+    "amount": 2,
+    "rate": 0.1210,
+    "result": 0.24
+  },
+  {
+    "timestampIso": "2025-12-28T20:38:25.2186769-03:00[America/Sao_Paulo]",
+    "from": "BRL",
+    "to": "ARS",
+    "amount": 600,
+    "rate": 263.0252,
+    "result": 157815.12
+  },
+  {
+    "timestampIso": "2025-11-03T00:40:32.8080394-03:00[America/Sao_Paulo]",
+    "from": "BRL",
+    "to": "USD",
+    "amount": 1000,
+    "rate": 0.1858,
+    "result": 185.80
+  },
+  {
+    "timestampIso": "2025-11-01T14:36:40.3945187-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 1000,
+    "rate": 5.3829,
+    "result": 5382.90
+  },
+  {
+    "timestampIso": "2025-11-01T13:49:20.5601288-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 1000,
+    "rate": 5.3829,
+    "result": 5382.90
+  },
+  {
+    "timestampIso": "2025-11-01T13:44:02.2229901-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 100,
+    "rate": 5.3829,
+    "result": 538.29
+  },
+  {
+    "timestampIso": "2025-11-01T13:41:46.9633728-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "CNY",
+    "amount": 100,
+    "rate": 7.1204,
+    "result": 712.04
+  },
+  {
+    "timestampIso": "2025-11-01T13:38:45.6788019-03:00[America/Sao_Paulo]",
+    "from": "BRL",
+    "to": "USD",
+    "amount": 10000,
+    "rate": 0.1858,
+    "result": 1858.00
+  },
+  {
+    "timestampIso": "2025-11-01T13:38:30.3532907-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 10000,
+    "rate": 5.3829,
+    "result": 53829.00
+  },
+  {
+    "timestampIso": "2025-11-01T13:36:05.9141819-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "KES",
+    "amount": 1000,
+    "rate": 129.1939,
+    "result": 129193.90
+  },
+  {
+    "timestampIso": "2025-11-01T13:35:47.6927138-03:00[America/Sao_Paulo]",
+    "from": "KES",
+    "to": "USD",
+    "amount": 1000,
+    "rate": 0.007740,
+    "result": 7.74
+  },
+  {
+    "timestampIso": "2025-11-01T13:35:24.8449671-03:00[America/Sao_Paulo]",
+    "from": "CNY",
+    "to": "USD",
+    "amount": 1000,
+    "rate": 0.1404,
+    "result": 140.40
+  },
+  {
+    "timestampIso": "2025-10-31T12:25:48.3436693-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 500,
+    "rate": 5.3837,
+    "result": 2691.85
+  },
+  {
+    "timestampIso": "2025-10-31T12:20:33.3113008-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 10000,
+    "rate": 5.3837,
+    "result": 53837.00
+  },
+  {
+    "timestampIso": "2025-10-31T12:20:02.7233712-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "ARS",
+    "amount": 2500,
+    "rate": 1433.67,
+    "result": 3584175.00
+  },
+  {
+    "timestampIso": "2025-10-31T12:19:42.5107922-03:00[America/Sao_Paulo]",
+    "from": "USD",
+    "to": "BRL",
+    "amount": 750,
+    "rate": 5.3837,
+    "result": 4037.78
+  }
+]

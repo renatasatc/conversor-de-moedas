@@ -1,0 +1,136 @@
+import model.ConversionRecord;
+import model.Currency;
+import service.HistoryManager;
+import service.LogService;
+import utils.Conversion;
+import utils.TaxService;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Conversion convercao = new Conversion();
+        TaxService importaApi = new TaxService();
+
+        HistoryManager history = new HistoryManager(50, Path.of("history.json"));
+        LogService logger = new LogService(Path.of("conversions.log"));
+
+        while (true) {
+            System.out.println("======= Bem-vindo ao Conversor de Moedas =======");
+            System.out.println("1 - Fazer conversão");
+            System.out.println("2 - Ver histórico (mais recentes primeiro)");
+            System.out.println("3 - Limpar histórico");
+            System.out.println("4 - Sair");
+            System.out.print("Escolha uma opção: ");
+            String opc = scanner.nextLine().trim();
+
+            if ("4".equals(opc)) {
+                System.out.println("Saindo do programa. Até logo!");
+                break;
+            } else if ("2".equals(opc)) {
+                List<ConversionRecord> list = history.listAll();
+                if (list.isEmpty()) {
+                    System.out.println("Histórico vazio.");
+                } else {
+                    System.out.println(" Histórico de conversões:");
+                    list.forEach(System.out::println);
+                }
+                continue;
+            } else if ("3".equals(opc)) {
+                history.clear();
+                System.out.println("🧹 Histórico limpo com sucesso.");
+                continue;
+            } else if (!"1".equals(opc)) {
+                System.out.println(" Opção inválida. Tente novamente.");
+                continue;
+            }
+
+            Currency from = lerCurrency(scanner, "Escolha a moeda de origem:");
+            Currency to = lerCurrency(scanner, "Escolha a moeda de destino:");
+
+            if (from == to) {
+                System.out.println(" Moeda de origem e destino são iguais. Escolha moedas diferentes.");
+                continue;
+            }
+
+            BigDecimal quantidade;
+            try {
+                System.out.print("Digite o valor a ser convertido: ");
+                String linha = scanner.nextLine().trim();
+                quantidade = new BigDecimal(linha);
+                if (quantidade.compareTo(BigDecimal.ZERO) < 0) {
+                    System.out.println("Digite um valor positivo.");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(" Valor inválido. Use apenas números (ex: 60.70).");
+                continue;
+            }
+
+            try {
+                BigDecimal taxa = importaApi.obterTaxa(from.code(), to.code());
+                BigDecimal resultado = convercao.convertendoMoedas(taxa, quantidade);
+
+                String simbolo = obterSimbolo(to);
+                System.out.printf("A conversão de %s para %s é: %s%s%n", from.code(), to.code(), simbolo, resultado);
+
+                String nowIso = ZonedDateTime.now().format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                ConversionRecord rec = new ConversionRecord(nowIso, from, to, quantidade, taxa, resultado);
+                history.add(rec);
+                logger.log(rec);
+
+            } catch (IOException | InterruptedException e) {
+                System.out.println("Erro na chamada à API: " + e.getMessage());
+                e.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        scanner.close();
+    }
+
+    private static Currency lerCurrency(Scanner scanner, String prompt) {
+        Currency[] moedas = Currency.values();
+
+        while (true) {
+            System.out.println(prompt);
+            for (int i = 0; i < moedas.length; i++) {
+                System.out.printf("%d - %s (%s)%n", i + 1, moedas[i].code(), moedas[i].getNomeCompleto());
+            }
+            System.out.print("Escolha o número da moeda: ");
+            String linha = scanner.nextLine().trim();
+            try {
+                int idx = Integer.parseInt(linha) - 1;
+                if (idx >= 0 && idx < moedas.length) {
+                    return moedas[idx];
+                } else {
+                    System.out.println(" Número fora do intervalo. Tente novamente.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Digite o número da opção (ex: 1).");
+            }
+        }
+    }
+
+    private static String obterSimbolo(Currency currency) {
+        switch (currency) {
+            case BRL: return "R$ ";
+            case ARS: return "ARS ";
+            case BOB: return "Bs ";
+            case KES: return "KSh ";
+            case EUR: return "EUR";
+            case CNY: return "¥ ";
+            default: return "$ ";
+        }
+    }
+}
